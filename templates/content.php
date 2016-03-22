@@ -1,9 +1,13 @@
 <article <?php post_class(); ?>>
-  <header>
-    <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-    <?php get_template_part('templates/entry-meta'); ?>
-  </header>
-  <div class="entry-summary">
-    <?php the_excerpt(); ?>
+<?php 
+	$thumb_id = get_post_thumbnail_id();
+	$thumb_url_array = wp_get_attachment_image_src($thumb_id, 'full', true);
+	$thumb_url = $thumb_url_array[0];
+ ?>
+  <div class="entry-summary 
+  col-md-<?php echo get_field("columns"); ?> 
+  col-md-offset-<?php echo get_field("offset"); ?>" 
+  style="background-image:url('<?php echo $thumb_url; ?>')">
+  	<a href="<?php echo get_field("url"); ?>"><?php the_post_thumbnail (); ?></a>
   </div>
 </article>
